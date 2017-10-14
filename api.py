@@ -17,7 +17,7 @@ def query():
   lookup = dnsyo.lookup(
       domain=str(domain),
       recordType="A",
-      listLocation="https://raw.githubusercontent.com/githubstatus/dnsyo-api/master/resolver-list.yml",
+      listLocation="https://raw.githubusercontent.com/varcao/dnsyo-api/master/resolver-list.yml",
       maxWorkers=100,
       maxServers=500
   )
