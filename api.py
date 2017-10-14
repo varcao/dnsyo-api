@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import request
+from flask import render_template
 from dnsyo import dnsyo
 import json
 
@@ -6,15 +8,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def info():
-  return "TODO: show some info here"
+  return render_template("index.html")
 
-@app.route('/<domain>')
-def query(domain):
+@app.route('/resolver', methods=['POST'])
+def query():
 
+  domain = request.form.get("domain")
   lookup = dnsyo.lookup(
       domain=str(domain),
       recordType="A",
-      listLocation="https://raw.github.com/samarudge/dnsyo/master/resolver-list.yml",
+      listLocation="https://raw.githubusercontent.com/githubstatus/dnsyo-api/master/resolver-list.yml",
       maxWorkers=100,
       maxServers=500
   )
